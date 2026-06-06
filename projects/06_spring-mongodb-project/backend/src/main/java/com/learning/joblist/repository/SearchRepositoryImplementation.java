@@ -32,11 +32,11 @@ public class SearchRepositoryImplementation implements SearchRepository {
 
         AggregateIterable<Document> result = collection.aggregate(Arrays.asList(new Document("$search",
                         new Document("text",
-                                new Document("query", text)
+                        new Document("query", text)
                                         .append("path", Arrays.asList("techs", "desc", "profile")))),
-                new Document("$sort",
+                        new Document("$sort",
                         new Document("exp", 1L)),
-                new Document("$limit", 5L)));
+                        new Document("$limit", 5L)));
 
         result.forEach(doc -> posts.add(converter.read(Post.class,doc)));
 
